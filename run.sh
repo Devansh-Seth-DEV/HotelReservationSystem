@@ -1,6 +1,6 @@
 #! /bin/sh
 
-EXT="class"
+EXE="Hotel"
 BIN_DIR="./bin"
 REF_LIB="./drivers/mysql-connector-j-8.0.33.jar"
 JR="java -cp $BIN_DIR:$REF_LIB"
@@ -8,7 +8,7 @@ JR="java -cp $BIN_DIR:$REF_LIB"
 filename="$1"
 if [ -z $filename ]
 then
-	read -p "Enter filename: " filename
+	filename=$EXE
 fi
 
 clear

@@ -5,6 +5,7 @@ SRC_DIR="./src"
 REF_LIB="./drivers/mysql-connector-j-8.0.33.jar"
 JC="javac -d $BIN_DIR -sourcepath $SRC_DIR -cp $REF_LIB"
 EXT="java"
+EXE="Hotel"
 
 if [ ! -d $BIN_DIR ]
 then
@@ -14,7 +15,7 @@ fi
 filename="$1"
 if [ -z $filename ]
 then
-	read -p "Enter filename: " filename
+	filename=$EXE
 fi
 
 echo "$JC $SRC_DIR/$filename.$EXT"

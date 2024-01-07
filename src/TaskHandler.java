@@ -16,16 +16,17 @@ class TaskHandler {
 		
 		tk_m.drawLbox("", w, '\n', this.h_sym);
 
-		cust.name = tk_m.eboxString("Enter guest name: ", w, this.h_sym, stdin);
+		cust.name = tk_m.eboxString("Enter guest name: ", w, this.h_sym, stdin); // text box for guest name
 		
-		cust.room_no = tk_m.eboxInt("Enter room number: ", w, this.h_sym, stdin);
+		cust.room_no = tk_m.eboxInt("Enter room number: ", w, this.h_sym, stdin); // text box for room number
 		
-		cust.phno = tk_m.eboxString("Enter contact number: ", w, this.h_sym, stdin);
+		cust.phno = tk_m.eboxString("Enter contact number: ", w, this.h_sym, stdin); // text box for contact number
 
-		tk_m.drawLbox("", w, '\n', this.h_sym);
-		tk_m.drawBorder(this.w_sym, this.edge, w); 
+		tk_m.drawLbox("", w, '\n', this.h_sym); // drawing an empty lable having width same as frame width
+		tk_m.drawBorder(this.w_sym, this.edge, w);  // drawing bottom border of frame window
 		System.out.println();
 		
+		// checking data validity
 		if(cust.name == "") {
 			System.out.println("INVALID: please enter a valid name!");
 			return -1;
@@ -37,7 +38,7 @@ class TaskHandler {
 			return -1;
 		}
 
-		int aff_r = dao.newRecord(cust);
+		int aff_r = dao.newRecord(cust); // sending data to database for inserting
 	   	if(aff_r > 0) {
 		   System.out.println("SUCCESS: room successfully reserved!");
 		} else {
@@ -48,7 +49,7 @@ class TaskHandler {
 	}
 
 	public void viewReservations() {
-		dao.getRecords();
+		dao.getRecords(); // prints the database data into console in tabular form
 	}
 
 	public int getRoomNumber(int w) {
@@ -57,14 +58,15 @@ class TaskHandler {
 
 		tk_m.drawLbox("", w, '\n', this.h_sym);
 		
-		id = tk_m.eboxInt("Enter reservation id: ", w, this.h_sym, stdin);
+		id = tk_m.eboxInt("Enter reservation id: ", w, this.h_sym, stdin); // text box for reservation id
 		
-		name = tk_m.eboxString("Enter guest name: ", w, this.h_sym, stdin);
+		name = tk_m.eboxString("Enter guest name: ", w, this.h_sym, stdin); // text box for guest name
 	
 		tk_m.drawLbox("", w, '\n', this.h_sym);
 		tk_m.drawBorder(this.w_sym, this.edge, w); 
 		System.out.println();
 
+		// checking the validity of data
 		if(id == -2) {
 			System.out.println("INVALID: please enter a valid id!");
 			return -1;
@@ -73,7 +75,7 @@ class TaskHandler {
 			return -1;
 		}
 
-		room_no = dao.getRoomRecord(id, name);
+		room_no = dao.getRoomRecord(id, name); // retriving the guest name and id from database
 		if(room_no > 0) {
 			System.out.printf("Room Number: R-%03d\n", room_no);
 			return 0;
@@ -89,7 +91,7 @@ class TaskHandler {
 
 		tk_m.drawLbox("", w, '\n', this.h_sym);
 		
-		id = tk_m.eboxInt("Enter reservation id to update: ", w, this.h_sym, stdin);
+		id = tk_m.eboxInt("Enter reservation id to update: ", w, this.h_sym, stdin); // text box for reservation id
 		if(id == -2) {
 			tk_m.drawLbox("", w, '\n', this.h_sym);
 			tk_m.drawBorder(this.w_sym, this.edge, w); 
@@ -98,6 +100,7 @@ class TaskHandler {
 		}
 
 		try {
+			// checking whether the id exists in database or not
 			if(!dao.isRecordExists(id)) {
 				tk_m.drawLbox("", w, '\n', this.h_sym);
 				tk_m.drawBorder(this.w_sym, this.edge, w); 
@@ -114,19 +117,22 @@ class TaskHandler {
 
 
 		String msg = "NEW DETAILS:";
+
 		tk_m.drawLbox("", w, '\n', this.h_sym);
 		tk_m.drawLbox(msg, w-msg.length(), '\n', this.h_sym);
-		cust.name = tk_m.eboxString("    Enter new guest name: ", w, this.h_sym, stdin);
-		
-		cust.room_no = tk_m.eboxInt("    Enter new room number: ", w, this.h_sym, stdin);
 
-		cust.phno = tk_m.eboxString("    Enter new contact number: ", w, this.h_sym, stdin);
+		cust.name = tk_m.eboxString("    Enter new guest name: ", w, this.h_sym, stdin); // text box for guest name
+		
+		cust.room_no = tk_m.eboxInt("    Enter new room number: ", w, this.h_sym, stdin); // text box for room number
+
+		cust.phno = tk_m.eboxString("    Enter new contact number: ", w, this.h_sym, stdin); // text box for contact number
 
 
 		tk_m.drawLbox("", w, '\n', this.h_sym);
 		tk_m.drawBorder(this.w_sym, this.edge, w); 
 		System.out.println();
 
+		// checking the validity of entered data
 		if(cust.name == "") {
 			System.out.println("INVALID: please enter a valid name!");
 			return -1;
@@ -138,7 +144,7 @@ class TaskHandler {
 			return -1;
 		}
 
-		int aff_r = dao.updateRecord(id, cust);
+		int aff_r = dao.updateRecord(id, cust); // sending data to database for modification
 		if(aff_r > 0) {
 			System.out.println("SUCCESS: guest details updated successfully!");
 		} else {
@@ -153,7 +159,7 @@ class TaskHandler {
 
 		tk_m.drawLbox("", w, '\n', this.h_sym);
 
-		id = tk_m.eboxInt("Enter reservation id to delete: ", w, this.h_sym, stdin);
+		id = tk_m.eboxInt("Enter reservation id to delete: ", w, this.h_sym, stdin); // text box for reservation id
 		if(id == -2) {
 			tk_m.drawLbox("", w, '\n', this.h_sym);
 			tk_m.drawBorder(this.w_sym, this.edge, w); 
@@ -162,6 +168,7 @@ class TaskHandler {
 		}
 
 		try {
+			// checking the existence of id in database
 			if(!dao.isRecordExists(id)) {
 				tk_m.drawLbox("", w, '\n', this.h_sym);
 				tk_m.drawBorder(this.w_sym, this.edge, w); 
@@ -180,7 +187,7 @@ class TaskHandler {
 		tk_m.drawBorder(this.w_sym, this.edge, w); 
 		System.out.println();
 
-		int aff_r = dao.deleteRecord(id);
+		int aff_r = dao.deleteRecord(id); // sending the id to database for deletion
 		if(aff_r > 0) {
 			System.out.println("SUCCESS: reservation deleted successfully!");
 		} else {
